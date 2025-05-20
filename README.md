@@ -2,4 +2,4 @@
 
 Ein Frontend-Projekt zum Spiel **Valorant**, umgesetzt mit **SASS**.
 
-**Live-Demo:** [oz28.github.io/Frontend-Design](https://oz28.github.io/Frontend-Design/)
+**Live-Demo:** [orkzahn.github.io/Frontend-Design](https://orkzahn.github.io/Frontend-Design/)
