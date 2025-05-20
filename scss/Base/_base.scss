@@ -1,0 +1,147 @@
+@use "../Utilities/mixins";
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+* {
+    color: var(--textColor);
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+// Basis-Styling für allgemeine Elemente
+article,
+p,
+ul {
+    font-size: 1rem;
+}
+
+h1 {
+    font-size: clamp(1em, 5vw, 1.7rem);
+    //font-size: 1.7rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+h3 {
+    font-size: 1.1rem;
+    color: var(--second);
+}
+
+body {
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    background-color: var(--bgColor);
+}
+
+h1 {
+    display: none;
+}
+
+article {
+    /* article erst bei Eintritt in den viewport sichtbar machen */
+    /* Anfangszustand, deshalb transition hier */
+    opacity: 0;
+    transform: translateX(-50%); // Startzustand
+    transition: all, 2s;
+    @include mixins.border(1px, var(--universalColor), solid);
+    //animation: zoomSite 2s ease-in-out;
+    background-color: var(--articleColor);
+    padding: 2%;
+    margin: 5%;
+
+    section {
+        margin: 2%;
+        padding: 2%;
+        @include mixins.border(3px, var(--borderBlue), solid, 10px);
+    }
+
+    div {
+        @include mixins.flex(row nowrap, center);
+        background-color: var(--divColor);
+
+        p {
+            max-width: 62ch; //charater unit, ähnlich wie em relative einheiten, bezieht sich auf die schriftgröße wie im nächsthöheren Container definiert.
+            margin: 2%;
+            font-size: clamp(1em, 2vw, 1.5rem); // Minimale schriftgröße 1em, bevorzugte breite 5vw, nicht größer als 1.5rem
+        }
+    }
+}
+
+img {
+    display: block; // Auf block setzten damit ich Margin benutzen kann
+    max-width: 100%;
+
+}
+
+/* Für nicht erreichbare Elemente kann man das Elternelement ansprechen*/
+/* Endzsutand transition */
+figure {
+    @include mixins.flex(row nowrap);
+    border-radius: 5%;
+    margin: auto;
+    /* Zum testen auf visible setzen Inline elemnte sind nebeneienander wenn platzt ist hier ist aber kein platz*/
+    overflow: hidden;
+    /* Bezugspunkt für die img und figcaption */
+    position: relative;
+
+    img {
+        width: 100%;
+    }
+}
+
+p {
+    &:hover {
+        background-color: hsla(255, 100%, 50%, 0.401); // Grundsätzlich bG verändern beim Hovern von text
+    }
+
+    &::selection {
+        // Beim Markieren von Text
+        color: hsl(0, 100%, 50%);
+        background: hsl(60, 100%, 50%);
+    }
+}
+
+nav {
+    ul {
+        @include mixins.flex(row wrap, center, center);
+        list-style: none;
+        padding: 0;
+        animation: zoomSite 2s ease-in-out;
+
+        li {
+            flex: 0 1 20em; //grow , shrink, basis
+            background: hsl(0, 19%, 63%);
+            padding: 1.3%;
+            margin: 2%;
+            border-radius: 10px;
+            opacity: 1; //Startzustand
+            text-align: center;
+            transition: all 0.3s ease; // Transition fürs hover
+
+            &:hover {
+                transform: scale(1.2);
+                /* Bei hover größer skalieren */
+                background-color: hsl(0, 83%, 55%);
+                /* Bei hover roter Hintergrund */
+            }
+
+        }
+
+        a {
+            @include mixins.basic-LinkElement(); // Nimmt die Text-Decoration raus und setzt die Default Text Farbe
+        }
+    }
+}
+
+body article:last-of-type {
+    background: hsl(255, 56%, 26%); // Die Hintergrund Farbe vom letzten Article ändern
+}

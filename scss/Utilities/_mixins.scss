@@ -1,0 +1,40 @@
+// Parameter: required und optional
+@mixin border($width, $color, $style: solid, $radius:0px) {
+    border: $width;
+    border-style: $style;
+    border-color: $color;
+    border-radius: $radius;
+}
+
+@mixin block-Element() {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+
+}
+
+@mixin basic-LinkElement() {
+    text-decoration: none;
+    color: var(--textColor);
+}
+
+@mixin basic-Button($margin, $padding, $width, $color, $bgColor){
+    margin: $margin;
+    padding: $padding;
+    font-size: 1em;
+    border: none;
+    border-radius: 12px;
+    width: $width;
+    color: $color;
+    background-color: $bgColor;
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+@mixin flex($flow:row nowrap, $content:flex-start, $items: stretch){
+    display: flex;
+    flex-flow: $flow; /* Shorthand für flex-direction und flex-wrap */
+    justify-content: $content; //hauptachse von links nach rechts
+    align-items: $items; //kreuzachse von oben nach unten
+}

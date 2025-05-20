@@ -1,0 +1,136 @@
+@use "../Utilities/mixins";
+
+/* Abfrage für die viewport Größe */
+@media screen and (max-width:45em) {
+    #logo{
+        max-width: 70%;
+    }
+    article {
+        div {
+            display: block;
+            p {
+                font-size: clamp(1em, 5vw, 1.5rem); // Minimale schriftgröße 1em, bevorzugte breite 5vw, nicht größer als 1.5rem
+            }
+        }
+    }
+
+    h1,
+    h2 {
+        font-size: clamp(1em, 5vw, 1.7rem);
+        text-align: center;
+    }
+
+    #info_Table{
+
+        tr {
+            display: block;
+            margin: 2%;
+        }
+    
+        tr:nth-of-type(2n) {
+            background-color: hsla(0, 100%, 50%, 0.377);
+        }
+    
+        td::before {
+            content: attr(data-label);
+            font-weight: bold;
+        }
+    
+        td {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
+    
+        thead {
+            display: none;
+        }
+    }
+
+    #formular {
+        width: 90%;
+        opacity: 1;
+    }
+
+    #agenten {
+        div {
+            display: block;
+            margin: 0 auto;
+            width: 70%;
+        }
+    }
+
+    #entwicklung {
+        div {
+            img {
+                display: block;
+                max-width: 100%;
+            }
+        }
+    }
+
+}
+
+/* pdf oder tatsächlicher Druck */
+@media print {
+
+    * {
+        color: hsl(0, 0%, 0%) !important; // Alles auf schwarz setzen
+    }
+
+    nav {
+        ul {
+            display: block;
+        }
+    }
+
+    p {
+        font-size: 15pt;
+    }
+
+    #formular {
+        width: 90%;
+        page-break-inside: avoid;
+    }
+
+    #agenten {
+        div {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    #entwicklung {
+        div {
+            img {
+                max-width: 100%;
+
+            }
+        }
+    }
+    article {
+        page-break-inside: avoid;
+        margin: 0;
+        padding: 0;
+        border: none;
+        opacity: 1;
+        width: 100%;
+
+
+        section {
+            page-break-inside: avoid;
+            padding: 0;
+            margin: 0;
+            border: none;
+        }
+
+        div {
+            @include mixins.block-Element();
+
+            p {
+                margin: 2%;
+            }
+        }
+
+    }
+
+}

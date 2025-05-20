@@ -1,0 +1,206 @@
+@use "../Utilities/mixins";
+
+
+#logo {
+    max-width: 30%;
+    height: auto;
+    margin: 0 auto; // Mittig platzieren, margin-top ,margin-bottom, left und right auto
+    padding: 2%;
+    animation: zoomSite 2s ease-in;
+}
+
+#entwicklung {
+    img {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+
+/* Anfangszustand transition */
+#imgKonzept {
+    // Erstes Bild Startzustand immer Sichtbar
+    opacity: 1;
+    transition: all 0.5s;
+}
+
+#imgAgenten {
+    // zweites Bild Startzustand nicht Sichtbar
+    opacity: 0;
+    transition: all 0.5s; //transition property, transition delay, timing func
+}
+
+
+figure:hover {
+    #imgKonzept {
+        opacity: 1;
+        transform: translateX(-100%);
+    }
+
+    #imgAgenten {
+        transform: none;
+        opacity: 1;
+        transform: translateX(-100%);
+    }
+}
+
+
+/*Bild nur in der Mobilversion Anzeigen*/
+#entwicklung {
+    div {
+        img {
+            display: none;
+            max-width: 30%;
+            margin: auto 0;
+        }
+    }
+}
+
+#agenten {
+    div {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); // Maximal 4 pro Zeile
+
+        div {
+            display: block;
+            overflow: hidden;
+            margin: 2% auto;
+            padding: 2%;
+            background-color: hsla(0, 0%, 19%, 0.696);
+
+            img {
+                opacity: 0.8;
+
+                &:hover {
+                    animation: pulse 0.5s ease-in;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+
+
+#info_Table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+
+    td,
+    th {
+        border: 1px solid hsl(60, 100%, 50%);
+        padding: 2%;
+    }
+
+    tr {
+
+        &:hover {
+            background-color: hsl(0, 100%, 50%);
+        }
+
+        background: var(--universalColor);
+
+    }
+
+    th {
+        padding: 12px;
+        text-align: left;
+        background-color: hsl(0, 0%, 0%);
+        color: hsl(60, 100%, 50%);
+    }
+}
+
+#formular {
+    max-width: 100%; // Maximale Breite des Formulars
+    width: 40%;
+    margin: 2% auto; // Zentriert das Formular  mit Abstand 
+    padding: 2%;
+    @include mixins.border(1px, var(--universalColor), solid, 5%);
+    background-color: hsl(200, 5.9%, 10%);
+    opacity: 0.2;
+    transition: all 1s;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    form {
+        text-align: center;
+
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 2%;
+
+            legend {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            label {
+                font-weight: bold;
+            }
+        }
+
+        input {
+            background-color: black;
+
+            &[type="text"],
+            &[type="email"] {
+                padding: 4%;
+                border-radius: 15px;
+                font-size: 1em;
+                width: 100%;
+                transition: border-color 0.3s;
+
+                &:focus {
+                    border-color: hsl(247, 81%, 47%);
+                    outline: none;
+                }
+            }
+
+            &[type="submit"] {
+                @include mixins.basic-Button(2%, 4%, 80%, var(--textColor), hsl(117, 90%, 55%));
+            }
+
+            &[type="reset"] {
+                @include mixins.basic-Button(2%, 4%, 80%, var(--textColor), hsl(0, 78%, 49%));
+            }
+
+            &:invalid {
+                @include mixins.border(1px, var(--borderRed), solid);
+            }
+
+            &:valid:not([type=submit]) {
+                @include mixins.border(1px, var(--borderGreen), solid);
+            }
+        }
+    }
+}
+
+
+#mad {
+    width: 6em;
+    overflow: hidden;
+    transform: rotate(10deg);
+    @include mixins.border(5px, var(--primary), solid, 12px);
+    transition: all 250ms;
+
+    :last-child {
+        display: none;
+    }
+
+    &:hover {
+        transform: rotate(0);
+        animation-play-state: paused;
+
+        :first-child {
+            display: none;
+        }
+
+        :last-child {
+            display: block;
+        }
+    }
+}

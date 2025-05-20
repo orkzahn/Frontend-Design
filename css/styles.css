@@ -1,0 +1,488 @@
+@charset "UTF-8";
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+* {
+  color: var(--textColor);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+article,
+p,
+ul {
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: clamp(1em, 5vw, 1.7rem);
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+h3 {
+  font-size: 1.1rem;
+  color: var(--second);
+}
+
+body {
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  background-color: var(--bgColor);
+}
+
+h1 {
+  display: none;
+}
+
+article {
+  /* article erst bei Eintritt in den viewport sichtbar machen */
+  /* Anfangszustand, deshalb transition hier */
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: all, 2s;
+  border: 1px;
+  border-style: solid;
+  border-color: var(--universalColor);
+  border-radius: 0px;
+  background-color: var(--articleColor);
+  padding: 2%;
+  margin: 5%;
+}
+article section {
+  margin: 2%;
+  padding: 2%;
+  border: 3px;
+  border-style: solid;
+  border-color: var(--borderBlue);
+  border-radius: 10px;
+}
+article div {
+  display: flex;
+  flex-flow: row nowrap; /* Shorthand für flex-direction und flex-wrap */
+  justify-content: center;
+  align-items: stretch;
+  background-color: var(--divColor);
+}
+article div p {
+  max-width: 62ch;
+  margin: 2%;
+  font-size: clamp(1em, 2vw, 1.5rem);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Für nicht erreichbare Elemente kann man das Elternelement ansprechen*/
+/* Endzsutand transition */
+figure {
+  display: flex;
+  flex-flow: row nowrap; /* Shorthand für flex-direction und flex-wrap */
+  justify-content: flex-start;
+  align-items: stretch;
+  border-radius: 5%;
+  margin: auto;
+  /* Zum testen auf visible setzen Inline elemnte sind nebeneienander wenn platzt ist hier ist aber kein platz*/
+  overflow: hidden;
+  /* Bezugspunkt für die img und figcaption */
+  position: relative;
+}
+figure img {
+  width: 100%;
+}
+
+p:hover {
+  background-color: hsla(255, 100%, 50%, 0.401);
+}
+p::selection {
+  color: hsl(0, 100%, 50%);
+  background: hsl(60, 100%, 50%);
+}
+
+nav ul {
+  display: flex;
+  flex-flow: row wrap; /* Shorthand für flex-direction und flex-wrap */
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  animation: zoomSite 2s ease-in-out;
+}
+nav ul li {
+  flex: 0 1 20em;
+  background: hsl(0, 19%, 63%);
+  padding: 1.3%;
+  margin: 2%;
+  border-radius: 10px;
+  opacity: 1;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+nav ul li:hover {
+  transform: scale(1.2);
+  /* Bei hover größer skalieren */
+  background-color: hsl(0, 83%, 55%);
+  /* Bei hover roter Hintergrund */
+}
+nav ul a {
+  text-decoration: none;
+  color: var(--textColor);
+}
+
+body article:last-of-type {
+  background: hsl(255, 56%, 26%);
+}
+
+#logo {
+  max-width: 30%;
+  height: auto;
+  margin: 0 auto;
+  padding: 2%;
+  animation: zoomSite 2s ease-in;
+}
+
+#entwicklung img {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+/* Anfangszustand transition */
+#imgKonzept {
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+#imgAgenten {
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+figure:hover #imgKonzept {
+  opacity: 1;
+  transform: translateX(-100%);
+}
+figure:hover #imgAgenten {
+  transform: none;
+  opacity: 1;
+  transform: translateX(-100%);
+}
+
+/*Bild nur in der Mobilversion Anzeigen*/
+#entwicklung div img {
+  display: none;
+  max-width: 30%;
+  margin: auto 0;
+}
+
+#agenten div {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+#agenten div div {
+  display: block;
+  overflow: hidden;
+  margin: 2% auto;
+  padding: 2%;
+  background-color: hsla(0, 0%, 19%, 0.696);
+}
+#agenten div div img {
+  opacity: 0.8;
+}
+#agenten div div img:hover {
+  animation: pulse 0.5s ease-in;
+  opacity: 1;
+}
+
+#info_Table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#info_Table td,
+#info_Table th {
+  border: 1px solid hsl(60, 100%, 50%);
+  padding: 2%;
+}
+#info_Table tr {
+  background: var(--universalColor);
+}
+#info_Table tr:hover {
+  background-color: hsl(0, 100%, 50%);
+}
+#info_Table th {
+  padding: 12px;
+  text-align: left;
+  background-color: hsl(0, 0%, 0%);
+  color: hsl(60, 100%, 50%);
+}
+
+#formular {
+  max-width: 100%;
+  width: 40%;
+  margin: 2% auto;
+  padding: 2%;
+  border: 1px;
+  border-style: solid;
+  border-color: var(--universalColor);
+  border-radius: 5%;
+  background-color: hsl(200, 5.9%, 10%);
+  opacity: 0.2;
+  transition: all 1s;
+}
+#formular:hover {
+  opacity: 1;
+}
+#formular form {
+  text-align: center;
+}
+#formular form fieldset {
+  border: none;
+  padding: 0;
+  margin: 2%;
+}
+#formular form fieldset legend {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+#formular form fieldset label {
+  font-weight: bold;
+}
+#formular form input {
+  background-color: black;
+}
+#formular form input[type=text], #formular form input[type=email] {
+  padding: 4%;
+  border-radius: 15px;
+  font-size: 1em;
+  width: 100%;
+  transition: border-color 0.3s;
+}
+#formular form input[type=text]:focus, #formular form input[type=email]:focus {
+  border-color: hsl(247, 81%, 47%);
+  outline: none;
+}
+#formular form input[type=submit] {
+  margin: 2%;
+  padding: 4%;
+  font-size: 1em;
+  border: none;
+  border-radius: 12px;
+  width: 80%;
+  color: var(--textColor);
+  background-color: hsl(117, 90%, 55%);
+}
+#formular form input[type=submit]:hover {
+  opacity: 0.9;
+}
+#formular form input[type=reset] {
+  margin: 2%;
+  padding: 4%;
+  font-size: 1em;
+  border: none;
+  border-radius: 12px;
+  width: 80%;
+  color: var(--textColor);
+  background-color: hsl(0, 78%, 49%);
+}
+#formular form input[type=reset]:hover {
+  opacity: 0.9;
+}
+#formular form input:invalid {
+  border: 1px;
+  border-style: solid;
+  border-color: var(--borderRed);
+  border-radius: 0px;
+}
+#formular form input:valid:not([type=submit]) {
+  border: 1px;
+  border-style: solid;
+  border-color: var(--borderGreen);
+  border-radius: 0px;
+}
+
+#mad {
+  width: 6em;
+  overflow: hidden;
+  transform: rotate(10deg);
+  border: 5px;
+  border-style: solid;
+  border-color: var(--primary);
+  border-radius: 12px;
+  transition: all 250ms;
+}
+#mad :last-child {
+  display: none;
+}
+#mad:hover {
+  transform: rotate(0);
+  animation-play-state: paused;
+}
+#mad:hover :first-child {
+  display: none;
+}
+#mad:hover :last-child {
+  display: block;
+}
+
+.loadVisible {
+  opacity: 1;
+  animation: moveLeftRight 1s cubic-bezier(0, 0.65, 1, 1) forwards alternate;
+}
+
+:root {
+  --primary: hsl(0, 0%, 100%);
+  --second: hsl(62, 87%, 43%);
+  --bgColor: hsl(207, 59%, 7%);
+  --textColor: hsl(0, 0%, 100%);
+  --textColorBlack: hsl(0, 0%, 0%);
+  --articleColor: hsla(0, 100%, 50%, 0.146);
+  --universalColor: hsl(16, 57%, 45%);
+  --divColor: hsla(225, 61%, 26%, 0.563);
+  --borderGreen: hsl(134, 100%, 30%);
+  --borderRed: hsl(0, 100%, 50%);
+  --borderBlue:hsl(226, 62%, 50%);
+}
+
+/* Abfrage für die viewport Größe */
+@media screen and (max-width: 45em) {
+  #logo {
+    max-width: 70%;
+  }
+  article div {
+    display: block;
+  }
+  article div p {
+    font-size: clamp(1em, 5vw, 1.5rem);
+  }
+  h1,
+  h2 {
+    font-size: clamp(1em, 5vw, 1.7rem);
+    text-align: center;
+  }
+  #info_Table tr {
+    display: block;
+    margin: 2%;
+  }
+  #info_Table tr:nth-of-type(2n) {
+    background-color: hsla(0, 100%, 50%, 0.377);
+  }
+  #info_Table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+  #info_Table td {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+  }
+  #info_Table thead {
+    display: none;
+  }
+  #formular {
+    width: 90%;
+    opacity: 1;
+  }
+  #agenten div {
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+  }
+  #entwicklung div img {
+    display: block;
+    max-width: 100%;
+  }
+}
+/* pdf oder tatsächlicher Druck */
+@media print {
+  * {
+    color: hsl(0, 0%, 0%) !important;
+  }
+  nav ul {
+    display: block;
+  }
+  p {
+    font-size: 15pt;
+  }
+  #formular {
+    width: 90%;
+    page-break-inside: avoid;
+  }
+  #agenten div {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #entwicklung div img {
+    max-width: 100%;
+  }
+  article {
+    page-break-inside: avoid;
+    margin: 0;
+    padding: 0;
+    border: none;
+    opacity: 1;
+    width: 100%;
+  }
+  article section {
+    page-break-inside: avoid;
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+  article div {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+  }
+  article div p {
+    margin: 2%;
+  }
+}
+@keyframes zoomSite {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes rotateP {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes moveLeftRight {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
